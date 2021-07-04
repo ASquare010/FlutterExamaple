@@ -13,7 +13,7 @@ class Network {
   // ignore: missing_return
   Future<ApiModal> getData(String cityName) async {
     final String url =
-        'http://api.openweathermap.org/data/2.5/forecast?q=$cityName&cnt=7&units=metric&appid=${Utils.appKey}';
+        'http://api.openweathermap.org/data/2.5/forecast?q=$cityName&cnt=14&units=metric&appid=${Utils.appKey}';
 
      final http.Response response = await http.get(Uri.parse(Uri.encodeFull(url)));
      print(response.statusCode);

@@ -12,6 +12,10 @@ class Utils {
     return DateFormat("EEE, MMM d, y").format(dateTime);
   }
 
+  static String getDate(DateTime dateTime) {
+    return DateFormat('EEEEE', 'en_US').format(dateTime);
+  }
+
   static IconData weatherIcon(String data) {
     if (data == 'Clouds') {
       return FontAwesomeIcons.cloud;
