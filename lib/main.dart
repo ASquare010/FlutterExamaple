@@ -5,32 +5,23 @@ import 'SignUpForm/SignUpForm.dart';
 import 'TipCalculater/TipCalculate.dart';
 import 'TrueFalseQuizApp/TrueFalseQuizApp.dart';
 import 'WeatherForecast/WeatherForecast.dart';
-
 // This widget is the root of your application.
 void main() {
   runApp(MaterialApp(
     // theme: ThemeData(backgroundColor: blue,brightness: Brightness.dark,splashColor: blue,cursorColor: blue,textTheme: TextTheme(headline: TextStyle(color: white))),
-    home: ScreenSelect(),
+    home:  ScreenSelect(),
   ));
 }
 
 // Select Example To Text
 class ScreenSelect extends StatelessWidget {
-  final List<Widget> screen = <Widget>[
-    NetWorkCalling(),
-    SignUpForm(),
-    TipCalculate(),
-    TrueFalseQuizApp(),
-    NetWorkCallTwo(),
-    WeatherForecast()
-  ];
-  final List<String> screenName = [
-    'NetWorkCalling',
-    'SignUpForm',
-    'TipCalculate',
-    'TrueFalseQuizApp',
-    'NetWorkCallTwo',
-    'WeatherForecast'
+  final List<Screen> screen = [
+    Screen(NetWorkCalling(), 'NetWorkCalling'),
+    Screen(SignUpForm(), 'SignUpForm'),
+    Screen(TipCalculate(), 'TipCalculate'),
+    Screen(TrueFalseQuizApp(), 'TrueFalseQuizApp'),
+    Screen(NetWorkCallTwo(), 'NetWorkCallTwo'),
+    Screen(WeatherForecast(), 'WeatherForecast'),
   ];
 
   @override
@@ -42,11 +33,18 @@ class ScreenSelect extends StatelessWidget {
       body: ListView.builder(
         itemCount: screen.length,
         itemBuilder: (context, index) => ListTile(
-          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => screen[index])),
-          title: Text(screenName[index]),
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => screen[index].screen)),
+          title: Text(screen[index].name),
           trailing: Icon(Icons.arrow_forward_ios_rounded),
         ),
       ),
     );
   }
+}
+
+class Screen {
+  final Widget screen;
+  final String name;
+
+  Screen(this.screen, this.name);
 }

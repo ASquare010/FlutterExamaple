@@ -4,7 +4,7 @@
 // To parse this JSON data, do
 //
 //     final weatherForecastApi = weatherForecastApiFromJson(jsonString);
-import 'package:flutter_app/WeatherForecast/Modal/Utils.dart';
+import 'package:flutter_app/Utils.dart';
 import 'package:http/http.dart'as http;
 import 'Modal.dart';
 
@@ -13,7 +13,7 @@ class Network {
   // ignore: missing_return
   Future<ApiModal> getData(String cityName) async {
     final String url =
-        'http://api.openweathermap.org/data/2.5/forecast?q=$cityName&cnt=14&units=metric&appid=${Utils.appKey}';
+        'http://api.openweathermap.org/data/2.5/forecast?q=$cityName&cnt=30&units=metric&appid=${Utils.weatherApiKey}';
 
      final http.Response response = await http.get(Uri.parse(Uri.encodeFull(url)));
      print(response.statusCode);

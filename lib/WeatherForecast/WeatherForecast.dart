@@ -4,7 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app/AppTheme.dart';
 import 'package:flutter_app/WeatherForecast/Modal/Modal.dart';
 import 'package:flutter_app/WeatherForecast/Modal/Network.dart';
-import 'package:flutter_app/WeatherForecast/Modal/Utils.dart';
+import 'package:flutter_app/Utils.dart';
+import 'package:flutter_app/WeatherForecast/WeatherForcastMap.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'CustomWidgets.dart';
 
@@ -15,6 +16,7 @@ class WeatherForecast extends StatefulWidget {
 
 class _WeatherForecastState extends State<WeatherForecast> {
   Future<ApiModal> weatherForecast;
+  final widgetState = GlobalKey<WeatherForecastMapState>();
   String city = 'lahore';
 
   @override
@@ -29,6 +31,7 @@ class _WeatherForecastState extends State<WeatherForecast> {
     //     load = true;
     //   });
     // });
+
     super.initState();
   }
 
@@ -71,17 +74,17 @@ class _WeatherForecastState extends State<WeatherForecast> {
                       ),
                     ),
                     Expanded(
-                        child: snapshot.hasData
-                            ? Icon(
-                                Utils.weatherIcon(snapshot.data.list[0].weather[0].main),
-                                size: 150,
+                      child: snapshot.hasData
+                          ? Icon(
+                              Utils.weatherIcon(snapshot.data.list[0].weather[0].main),
+                              size: 150,
+                              color: white.withOpacity(0.2),
+                            )
+                          : Center(
+                              child: CircularProgressIndicator(
                                 color: white.withOpacity(0.2),
-                              )
-                            : Center(
-                                child: CircularProgressIndicator(
-                                  color: white.withOpacity(0.2),
-                                ),
                               ),
+                            ),
                     ),
                     Column(
                       children: [
@@ -90,35 +93,33 @@ class _WeatherForecastState extends State<WeatherForecast> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              snapshot.hasData
-                                  ? '${snapshot.data.list[0].main.temp.toStringAsFixed(0)}°C '
-                                  : '',
+                              snapshot.hasData ? '${snapshot.data.list[0].main.temp.toStringAsFixed(0)}°C ' : '',
                               style: TextStyle(fontSize: 45, color: white),
                             ),
                             Text(
-                              snapshot.hasData
-                                  ? '${snapshot.data.list[0].weather[0].description.toUpperCase()}'
-                                  : '',
+                              snapshot.hasData ? '${snapshot.data.list[0].weather[0].description.toUpperCase()}' : '',
                               style: TextStyle(color: grey),
                             )
                           ],
                         ),
-                       snapshot.hasData? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            WeatherInfoContainer(
-                              icon: FontAwesomeIcons.temperatureHigh,
-                              text: '${snapshot.data.list[0].main.feelsLike} °C',
-                            ),
-                            WeatherInfoContainer(
-                              icon: FontAwesomeIcons.solidGrinBeamSweat,
-                              text: '${snapshot.data.list[0].main.humidity} %',
-                            ),
-                            WeatherInfoContainer(
-                                icon: FontAwesomeIcons.wind, text: '${snapshot.data.list[0].wind.speed} mi/h'),
-                          ],
-                        ):SizedBox()
+                        snapshot.hasData
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  WeatherInfoContainer(
+                                    icon: FontAwesomeIcons.temperatureHigh,
+                                    text: '${snapshot.data.list[0].main.feelsLike} °C',
+                                  ),
+                                  WeatherInfoContainer(
+                                    icon: FontAwesomeIcons.solidGrinBeamSweat,
+                                    text: '${snapshot.data.list[0].main.humidity} %',
+                                  ),
+                                  WeatherInfoContainer(
+                                      icon: FontAwesomeIcons.wind, text: '${snapshot.data.list[0].wind.speed} mi/h'),
+                                ],
+                              )
+                            : SizedBox()
                       ],
                     ),
                     Spacer()
@@ -138,14 +139,17 @@ class _WeatherForecastState extends State<WeatherForecast> {
                           crossAxisSpacing: 6,
                           mainAxisSpacing: 8,
                         ),
-                        itemCount:snapshot.hasData? snapshot.data.list.length:0,
+                        itemCount: snapshot.hasData ? snapshot.data.list.length : 0,
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                             child: DayWeatherChip(
-                              temp: snapshot.hasData ? '${snapshot.data.list[index].main.temp.toStringAsFixed(0)}' : 'Loading',
-                              day:  snapshot.hasData ? '${Utils.getDate(snapshot.data.list[index].dtTxt)}' : 'Loading',
-                              icon:   snapshot.hasData ? Utils.weatherIcon(snapshot.data.list[index].weather[0].main) : 'Loading',
-
+                              temp: snapshot.hasData
+                                  ? '${snapshot.data.list[index].main.temp.toStringAsFixed(0)}'
+                                  : 'Loading',
+                              day: snapshot.hasData ? '${Utils.getDate(snapshot.data.list[index].dtTxt)}' : 'Loading',
+                              icon: snapshot.hasData
+                                  ? Utils.weatherIcon(snapshot.data.list[index].weather[0].main)
+                                  : 'Loading',
                             ),
                           );
                         },
@@ -166,30 +170,44 @@ class _WeatherForecastState extends State<WeatherForecast> {
 
   Widget blurTextForm() {
     return BlurContainer(
-      child: TextField(
-        cursorColor: white,
-        style: TextStyle(color: white),
-        onSubmitted: (value) {
-          city = value;
-          setState(() {
-            weatherForecast = getData();
-          });
-          // print(widget.city);
-        },
-        decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: 'Search City',
-            hintStyle: TextStyle(color: grey),
-            prefixIcon: Icon(
-              Icons.search,
-              color: white,
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              cursorColor: white,
+              style: TextStyle(color: white),
+              onSubmitted: (value) {
+                city = value;
+                setState(() {
+                  weatherForecast = getData();
+                });
+                // print(widget.city);
+              },
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Search City',
+                hintStyle: TextStyle(color: grey),
+                prefixIcon: Icon(Icons.search, color: white),
+              ),
             ),
-            suffixIcon: Icon(
-              Icons.location_on_outlined,
-              color: white,
-            )),
+          ),
+          IconButton(
+              onPressed: () async {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(
+                        builder: (context) => WeatherForecastMap(
+                              key: widgetState,
+                            )))
+                    .then((value) {
+                  city = value;
+                  setState(() {
+                    weatherForecast = getData();
+                  });
+                });
+              },
+              icon: Icon(Icons.location_on_outlined, color: white))
+        ],
       ),
     );
   }
-
 }
