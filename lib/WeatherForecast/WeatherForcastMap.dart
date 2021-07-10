@@ -4,10 +4,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 
 class WeatherForecastMap extends StatefulWidget {
-  const WeatherForecastMap({
-    Key key,
-  }) : super(key: key);
-
   @override
   WeatherForecastMapState createState() => WeatherForecastMapState();
 }
@@ -17,6 +13,7 @@ class WeatherForecastMapState extends State<WeatherForecastMap> {
   Position currentPosition;
   bool isLoading = true;
   String currentAddress = 'lahore';
+  Set<Marker> markers = {};
 
   @override
   void initState() {
@@ -34,6 +31,15 @@ class WeatherForecastMapState extends State<WeatherForecastMap> {
     _determinePosition().then((value) {
       setState(() {
         currentPosition = value;
+        markers.add(Marker(
+            markerId: MarkerId('Marker ${markers.length}'),
+            position: LatLng(currentPosition.latitude, currentPosition.longitude),
+            icon: BitmapDescriptor.defaultMarkerWithHue(200),
+            flat: true,
+            onTap: () {
+              onMapTap(LatLng(currentPosition.latitude, currentPosition.longitude));
+            },
+            infoWindow: InfoWindow(title: 'User Location')));
         isLoading = false;
       });
     });
@@ -63,7 +69,7 @@ class WeatherForecastMapState extends State<WeatherForecastMap> {
     return await Geolocator.getCurrentPosition();
   }
 
-  /// Converts Coordinates to City name as string
+  /// Converts Coordinates to City name as string bu using geocoding package
   void onMapTap(LatLng laLg) async {
     String address;
     print(laLg);
@@ -91,16 +97,20 @@ class WeatherForecastMapState extends State<WeatherForecastMap> {
         currentAddress = address.toLowerCase();
         print(currentAddress);
       }
-      Navigator.pop(context,currentAddress);
-
+      Navigator.pop(context, currentAddress);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: Text('Map'),
+          title: Text('Map',style: TextStyle(color: Colors.grey),),
+          backgroundColor: Color(0xFFE9F3F9).withOpacity(0.8),
+          shadowColor: Colors.orange,
+          centerTitle: true,
+          automaticallyImplyLeading: false,
         ),
         body: isLoading
             ? Center(child: CircularProgressIndicator())
@@ -114,6 +124,7 @@ class WeatherForecastMapState extends State<WeatherForecastMap> {
                 buildingsEnabled: true,
                 zoomControlsEnabled: false,
                 onMapCreated: onMapCreate,
+                markers: markers,
                 onTap: onMapTap,
               ));
   }

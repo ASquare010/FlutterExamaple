@@ -26,7 +26,6 @@ class BlurContainer extends StatelessWidget {
                     begin: Alignment.bottomLeft,
                     colors: [
                       Color(0xFFE9F3F9).withOpacity(0.2),
-                      // Color(0xFF000000).withOpacity(0.1),
                       Color(0xFFE1ECFF).withOpacity(0.1)
                     ],
                     end: Alignment.topRight)),

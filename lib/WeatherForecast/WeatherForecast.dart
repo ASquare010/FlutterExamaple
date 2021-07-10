@@ -16,7 +16,6 @@ class WeatherForecast extends StatefulWidget {
 
 class _WeatherForecastState extends State<WeatherForecast> {
   Future<ApiModal> weatherForecast;
-  final widgetState = GlobalKey<WeatherForecastMapState>();
   String city = 'lahore';
 
   @override
@@ -46,6 +45,7 @@ class _WeatherForecastState extends State<WeatherForecast> {
         future: weatherForecast,
         builder: (BuildContext context, AsyncSnapshot<ApiModal> snapshot) {
           return Scaffold(
+            resizeToAvoidBottomInset: true,
             body: Stack(
               children: [
                 SizedBox(
@@ -69,7 +69,9 @@ class _WeatherForecastState extends State<WeatherForecast> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text(
-                        snapshot.hasData ? '${Utils.getDateConverter(snapshot.data.list[0].dtTxt)}' : 'Loading',
+                        snapshot.hasData
+                            ? '${Utils.getDateConverter(snapshot.data.list[0].dtTxt)}'
+                            : 'Please tap the correct location on map \n or type correct city name',textAlign: TextAlign.center,
                         style: TextStyle(color: grey),
                       ),
                     ),
@@ -194,10 +196,11 @@ class _WeatherForecastState extends State<WeatherForecast> {
           IconButton(
               onPressed: () async {
                 Navigator.of(context)
-                    .push(MaterialPageRoute(
-                        builder: (context) => WeatherForecastMap(
-                              key: widgetState,
-                            )))
+                    .push(
+                  MaterialPageRoute(
+                    builder: (context) => WeatherForecastMap(),
+                  ),
+                )
                     .then((value) {
                   city = value;
                   setState(() {
