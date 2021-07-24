@@ -48,6 +48,7 @@ class _NetWorkCallTowState extends State<NetWorkCallTwo> {
                     title: data[index].title,
                     imageLink: data[index].url,
                     price: data[index].id,
+                    onTap: () {},
                   );
                 },
                 itemCount: (data == null) ? 0 : data.length,

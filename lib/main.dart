@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/BoardApp/BoardApp.dart';
 import 'package:flutter_app/NetWorkCall/NetWorkCallTwo.dart';
+import 'LearnProvider/LearnProvider.dart';
 import 'NetWorkCall/NetWorkCall.dart';
 import 'SignUpForm/SignUpForm.dart';
 import 'TipCalculater/TipCalculate.dart';
 import 'TrueFalseQuizApp/TrueFalseQuizApp.dart';
 import 'WeatherForecast/WeatherForecast.dart';
-// This widget is the root of your application.
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MaterialApp(
     // theme: ThemeData(backgroundColor: blue,brightness: Brightness.dark,splashColor: blue,cursorColor: blue,textTheme: TextTheme(headline: TextStyle(color: white))),
-    home:  ScreenSelect(),
+    home: ScreenSelect(),
   ));
 }
 
@@ -22,6 +27,8 @@ class ScreenSelect extends StatelessWidget {
     Screen(TrueFalseQuizApp(), 'TrueFalseQuizApp'),
     Screen(NetWorkCallTwo(), 'NetWorkCallTwo'),
     Screen(WeatherForecast(), 'WeatherForecast'),
+    Screen(StateChangeListener(), 'StateChangeListener'),
+    Screen(BoardApp(), 'ProviderFireBaseAuth&Cloud'),
   ];
 
   @override

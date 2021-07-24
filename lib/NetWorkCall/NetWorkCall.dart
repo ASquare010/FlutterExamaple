@@ -59,10 +59,7 @@ class _NetWorkCallingState extends State<NetWorkCalling> {
       body: Scrollbar(
         child: ListView.builder(
           itemBuilder: (builder, index) => ListViewCard(
-            imageLink: imageData[index].url,
-            price: imageData[index].id,
-            title: imageData[index].title,
-          ),
+              imageLink: imageData[index].url, price: imageData[index].id, title: imageData[index].title, onTap: () {}),
           itemCount: (imageData.length == null) ? 0 : imageData.length,
         ),
       ),
