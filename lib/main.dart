@@ -30,7 +30,6 @@ class ScreenSelect extends StatelessWidget {
     Screen(WeatherForecast(), 'WeatherForecast'),
     Screen(StateChangeListener(), 'StateChangeListener'),
     Screen(BoardApp(), 'ProviderFireBaseAuth&Cloud'),
-    Screen(FlameGame(), 'Flame Engine Game'),
   ];
 
   @override
