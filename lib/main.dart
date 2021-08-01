@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/BoardApp/BoardApp.dart';
+import 'package:flutter_app/FlameGame/FlameGame.dart';
 import 'package:flutter_app/NetWorkCall/NetWorkCallTwo.dart';
 import 'LearnProvider/LearnProvider.dart';
 import 'NetWorkCall/NetWorkCall.dart';
@@ -29,6 +30,7 @@ class ScreenSelect extends StatelessWidget {
     Screen(WeatherForecast(), 'WeatherForecast'),
     Screen(StateChangeListener(), 'StateChangeListener'),
     Screen(BoardApp(), 'ProviderFireBaseAuth&Cloud'),
+    Screen(FlameGame(), 'Flame Engine Game'),
   ];
 
   @override

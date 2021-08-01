@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app/AppTheme.dart';
 import 'package:flutter_app/WeatherForecast/Modal/Modal.dart';
 import 'package:flutter_app/WeatherForecast/Modal/Network.dart';
-import 'package:flutter_app/Utils.dart';
+import 'package:flutter_app/WeatherForecast/Utils.dart';
 import 'package:flutter_app/WeatherForecast/WeatherForcastMap.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'CustomWidgets.dart';

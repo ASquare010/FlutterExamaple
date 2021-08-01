@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/AppTheme.dart';
 import 'package:flutter_app/BoardApp/Services/Auth.dart';
-import 'package:flutter_app/BoardApp/Services/DataBase.dart';
-import 'package:provider/provider.dart';
 
 import 'BoardList.dart';
 
@@ -15,6 +13,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         title: Text('Home'),
@@ -26,11 +25,12 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: StreamProvider<List<Board>>.value(
-        value: DataBase().board,
-        initialData: [],
-        child: BoardList(),
-      ),
+      // body: StreamProvider<List<Board>>.value(
+      //   value: DataBase().board,
+      //   initialData: [],
+      //   child: BoardList(),
+      // ),
+      body: BoardList(),
     );
   }
 }

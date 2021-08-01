@@ -4,7 +4,7 @@
 // To parse this JSON data, do
 //
 //     final weatherForecastApi = weatherForecastApiFromJson(jsonString);
-import 'package:flutter_app/Utils.dart';
+import 'package:flutter_app/WeatherForecast/Utils.dart';
 import 'package:http/http.dart'as http;
 import 'Modal.dart';
 

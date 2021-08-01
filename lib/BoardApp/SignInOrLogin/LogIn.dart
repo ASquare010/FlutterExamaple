@@ -106,7 +106,7 @@ class _LogInState extends State<LogIn> {
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
           helperText: 'YourEmail@mail.com',
-          labelText: 'Email',
+          hintText: 'Email',
           prefixIcon: Icon(Icons.alternate_email),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
     );
