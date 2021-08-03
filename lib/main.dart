@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/BoardApp/BoardApp.dart';
-import 'package:flutter_app/FlameGame/FlameGame.dart';
+import 'package:flutter_app/KeyExample/KeyExample.dart';
 import 'package:flutter_app/NetWorkCall/NetWorkCallTwo.dart';
+import 'package:flutter_app/StarShipShooter/StarShipShooter.dart';
 import 'LearnProvider/LearnProvider.dart';
 import 'NetWorkCall/NetWorkCall.dart';
 import 'SignUpForm/SignUpForm.dart';
@@ -30,6 +31,8 @@ class ScreenSelect extends StatelessWidget {
     Screen(WeatherForecast(), 'WeatherForecast'),
     Screen(StateChangeListener(), 'StateChangeListener'),
     Screen(BoardApp(), 'ProviderFireBaseAuth&Cloud'),
+    Screen(KeyExample(), 'KeyExample'),
+    Screen(StarShipShooter(), 'StarShipShooter'),
   ];
 
   @override
@@ -41,7 +44,8 @@ class ScreenSelect extends StatelessWidget {
       body: ListView.builder(
         itemCount: screen.length,
         itemBuilder: (context, index) => ListTile(
-          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => screen[index].screen)),
+          onTap: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => screen[index].screen)),
           title: Text(screen[index].name),
           trailing: Icon(Icons.arrow_forward_ios_rounded),
         ),
