@@ -8,14 +8,11 @@ class Player extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.bottomCenter,
-      child: Transform.translate(
-        offset: Offset(x, 0),
-        child: Container(
-          width: 50,
-          height: 50,
-          color: Colors.blue,
-        ),
+      alignment: Alignment(x, 1),
+      child: Container(
+        width: 50,
+        height: 50,
+        color: Colors.blue,
       ),
     );
   }
