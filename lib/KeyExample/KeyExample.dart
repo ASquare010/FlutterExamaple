@@ -34,7 +34,7 @@ class _KeyExampleState extends State<KeyExample> {
                 )),
                 Expanded(
                     child: Container(
-                  color: Colors.grey,
+                  color: Colors.purpleAccent,
                 ))
               ],
             ),

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/BoardApp/BoardApp.dart';
 import 'package:flutter_app/KeyExample/KeyExample.dart';
 import 'package:flutter_app/NetWorkCall/NetWorkCallTwo.dart';
-import 'package:flutter_app/StarShipShooter/StarShipShooter.dart';
 import 'LearnProvider/LearnProvider.dart';
 import 'NetWorkCall/NetWorkCall.dart';
 import 'SignUpForm/SignUpForm.dart';
+import 'StarShipShooter/Wrapper.dart';
 import 'TipCalculater/TipCalculate.dart';
 import 'TrueFalseQuizApp/TrueFalseQuizApp.dart';
 import 'WeatherForecast/WeatherForecast.dart';
@@ -32,7 +32,7 @@ class ScreenSelect extends StatelessWidget {
     Screen(StateChangeListener(), 'StateChangeListener'),
     Screen(BoardApp(), 'ProviderFireBaseAuth&Cloud'),
     Screen(KeyExample(), 'KeyExample'),
-    Screen(StarShipShooter(), 'StarShipShooter'),
+    Screen(Wrapper(), 'StarShipShooter'),
   ];
 
   @override
