@@ -12,12 +12,15 @@ import 'WeatherForecast/WeatherForecast.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MaterialApp(
+
+   runApp(MaterialApp(
     // theme: ThemeData(backgroundColor: blue,brightness: Brightness.dark,splashColor: blue,cursorColor: blue,textTheme: TextTheme(headline: TextStyle(color: white))),
     home: ScreenSelect(),
   ));
+
 }
 
 // Select Example To Text
