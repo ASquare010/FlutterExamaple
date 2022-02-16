@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class EnemyDyDxNotifier{
+class EnemyDyDxNotifier extends ChangeNotifier{
   final double screenWidth;
   double x = 0, y = 0;
   double velocityY = 1, speed = 0.04, ballTravel = 0;
@@ -74,6 +74,7 @@ class EnemyDyDxNotifier{
   }
 
   double _equation(double x) {
+    notifyListeners();
     double val =
         (0.5 * x * x) - x + double.parse(ballTravel.toStringAsFixed(2));
     if (val > 1)
