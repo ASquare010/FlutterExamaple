@@ -29,6 +29,9 @@ class Wrapper extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: playerEnemyCollide,
         ),
+        ChangeNotifierProvider.value(
+          value: enemy,
+        ),
       ],
       child: StarShipShooter(),
     );
